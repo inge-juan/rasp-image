@@ -1,0 +1,16 @@
+void MainWindow::on_dial_sliderReleased()
+{
+    int angulo = ui->dial->value();
+    // Crear el objeto JSON
+    QJsonObject jsonObject;
+    jsonObject["dispositivo"] = "servo";  // Valor por defecto para "dispositivo"
+    jsonObject["angulo"] = angulo;     // Valor de "angulo" es el valor de valorDial
+
+    // Convertir el objeto JSON a una cadena
+    QJsonDocument jsonDoc(jsonObject);
+    QString mensajeJson = jsonDoc.toJson(QJsonDocument::Compact);
+    ui->label->setText(mensajeJson);
+
+    //conexionWeb("http://192.168.0.125", mensajeJson, "wlo1");
+    conexionWeb("http://192.168.0.102", mensajeJson, "wlo1");
+}
